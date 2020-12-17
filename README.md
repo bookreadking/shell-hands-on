@@ -2,6 +2,10 @@
 日常の業務で使えるシェルのTipsを覚えるハンズオンです
 
 ## 準備
+
+<details>
+<summary>Dockerコンテナの設定方法</summary>
+
 dockerでCentOS7のコンテナを立ち上げましょう。`-it`オプション指定でコンテナの中にログインします。
 
 ```sh
@@ -23,6 +27,7 @@ git clone https://github.com/bookreadking/shell-hands-on.git
 ```
 
 準備が出来たのでコマンドを試しましょう。
+</details>
 
 ## 1. 改行ありのテキストをターミナル上でコピー＆ペーストで/tmp/work.txtファイルに保存しなさい
 
@@ -213,7 +218,6 @@ $ diff -y -W 10 <(for i in {1,2,3,4}; do echo $i; done) <(for i in {1,2,4,5}; do
 </details>
 
 
-
 ## 8. 2つのファイルをjoinして一つにまとめる
 
 ```
@@ -250,4 +254,38 @@ banana 120円 バナナ
 melon 900円 メロン
 ```
 
+</details>
+
+## 9. ファイルからパターンマッチで抽出する
+下記のファイルから、ASU2JS、LCJB...の部分を抽出しなさい
+
+```sh
+$ cat user-agent.txt
+Mozilla/5.0 (Windows NT 6.3; WOW64; Trident/7.0; ASU2JS; rv:11.0) like Gecko
+Mozilla/5.0 (Windows NT 6.3; WOW64; Trident/7.0; LCJB; rv:11.0) like Gecko
+Mozilla/5.0 (Windows NT 6.3; WOW64; Trident/7.0; MAARJS; rv:11.0) like Gecko
+Mozilla/5.0 (Windows NT 6.3; WOW64; Trident/7.0; MAFSJS; rv:11.0) like Gecko
+Mozilla/5.0 (Windows NT 6.3; WOW64; Trident/7.0; MALNJS; rv:11.0) like Gecko
+Mozilla/5.0 (Windows NT 6.3; WOW64; Trident/7.0; MAMIJS; rv:11.0) like Gecko
+Mozilla/5.0 (Windows NT 6.3; WOW64; Trident/7.0; MASPJS; rv:11.0) like Gecko
+Mozilla/5.0 (Windows NT 6.3; WOW64; Trident/7.0; Touch; rv:11.0) like Gecko
+```
+
+<details>
+<summary>答え</summary>
+
+awkのマッチで正規表現で取得する
+
+
+```sh
+# awk 'match($0, /Mozilla\/5.0 \(Windows NT 6\.3; WOW64; Trident\/7\.0; (.+); rv:11\.0) like Gecko/,a){print a[1]}' user-agent.txt
+ASU2JS
+LCJB
+MAARJS
+MAFSJS
+MALNJS
+MAMIJS
+MASPJS
+Touch
+```
 </details>
