@@ -1,0 +1,4 @@
+apple りんご
+banana バナナ
+melon メロン
+pineapple パイナップル
