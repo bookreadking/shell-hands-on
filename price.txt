@@ -1,0 +1,4 @@
+apple 100円
+banana 120円
+strawberry 650円
+melon 900円
