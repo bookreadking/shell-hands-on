@@ -13,13 +13,18 @@ docker run -it --rm centos:7.7.1908 /bin/bash
 ログインしたらまず必要なコマンドをインストールしてください
 
 ```sh
-# nkfコマンドをインストール
-yum install -y epel-release && yum install -y nkf
+yum install -y epel-release && yum install -y nkf && yum install -y git
+```
+
+このリポジトリをcloneしておいてください
+
+```sh
+git clone https://github.com/bookreadking/shell-hands-on.git
 ```
 
 準備が出来たのでコマンドを試しましょう。
 
-## 改行ありのテキストをターミナル上でコピー＆ペーストで/tmp/work.txtファイルに保存しなさい
+## 1. 改行ありのテキストをターミナル上でコピー＆ペーストで/tmp/work.txtファイルに保存しなさい
 
 下記のテキストをクリップボードにコピーしてターミナル上でテキストファイルに保存してください。  
 
@@ -79,7 +84,7 @@ EOS
 https://qiita.com/take4s5i/items/e207cee4fb04385a9952
 </details>
 
-## ファイルの文字コードと改行コードをコマンドを使って調べなさい
+## 2. ファイルの文字コードと改行コードをコマンドを使って調べなさい
 
 コマンド一発でできます
 
@@ -107,7 +112,7 @@ ASCII (MIXED NL)
 
 </details>
 
-## ファイルを開かずにどんな形式のファイルなのか調べなさい
+## 3. ファイルを開かずにどんな形式のファイルなのか調べなさい
 
 コマンド一発でできます
 
@@ -127,7 +132,7 @@ file /tmp/work.txt
 
 </details>
 
-## ファイルの指定した範囲の行だけ取得しなさい
+## 4. ファイルの指定した範囲の行だけ取得しなさい
 
 <details>
 <summary>答え</summary>
@@ -140,7 +145,7 @@ sed -n 2,4p anaconda-post.log
 
 </details>
 
-## ファイルのgrepで合致した行の前後も含めて取得しなさい
+## 5. ファイルのgrepで合致した行の前後も含めて取得しなさい
 
 <details>
 <summary>答え</summary>
@@ -157,7 +162,7 @@ No Match for argument: gettext-libs
 ```
 </details>
 
-## ファイルを検索した結果をgrepしたい
+## 6.0 ファイルを検索した結果をgrepしたい
 
 <details>
 <summary>答え</summary>
@@ -180,7 +185,7 @@ grep あ work.txt yum.log
 
 </details>
 
-## コマンドの実行結果をファイルにいちいち保存せずに別のコマンドで使いたい
+## 7.0 コマンドの実行結果をファイルにいちいち保存せずに別のコマンドで使いたい
 
 <details>
 <summary>答え</summary>
@@ -195,5 +200,16 @@ $ diff -y -W 10 <(for i in {1,2,3,4}; do echo $i; done) <(for i in {1,2,4,5}; do
 4	4
     >	5
 ```
+
+</details>
+
+
+
+## 8. 2つのファイルをjoinする
+
+<details>
+<summary>答え</summary>
+
+
 
 </details>
