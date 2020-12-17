@@ -13,7 +13,7 @@ docker run -it --rm centos:7.7.1908 /bin/bash
 ログインしたらまず必要なコマンドをインストールしてください
 
 ```sh
-yum install -y epel-release && yum install -y nkf && yum install -y git
+yum install -y epel-release && yum install -y nkf && yum install -y git && yum install -y file
 ```
 
 このリポジトリをcloneしておいてください
@@ -130,6 +130,17 @@ file /tmp/work.txt
 
 [演習] 色々なファイルを調べてみよう
 
+```sh
+# file /dev/tty
+/dev/tty: character special
+
+# file /bin/sh
+/bin/sh: symbolic link to `bash'
+
+# file /bin/ls
+/bin/ls: ELF 64-bit LSB executable, x86-64, version 1 (SYSV), dynamically linked (uses shared libs), for GNU/Linux 2.6.32, BuildID[sha1]=aaf05615b6c91d3cbb076af81aeff531c5d7dfd9, stripped
+```
+
 </details>
 
 ## 4. ファイルの指定した範囲の行だけ取得しなさい
@@ -140,7 +151,9 @@ file /tmp/work.txt
 `sed -n 開始行,終了行p`で実現出来ます。
 
 ```
-sed -n 2,4p anaconda-post.log
+# sed -n 2,3p price.txt
+banana 120円
+strawberry 650円
 ```
 
 </details>
@@ -162,7 +175,7 @@ No Match for argument: gettext-libs
 ```
 </details>
 
-## 6.0 ファイルを検索した結果をgrepしたい
+## 6. ファイルを検索した結果をgrepしたい
 
 <details>
 <summary>答え</summary>
@@ -175,17 +188,13 @@ $ find /etc -type f|xargs grep --color=auto CentOS
 /etc/os-release:CENTOS_MANTISBT_PROJECT="CentOS-7"
 ```
 
-xargs自体は受け取った毛
-```sh
-ls | xargs grep あ
-は
-grep あ work.txt yum.log
-のように動くイメージ
-```
+xargs自体は受け取った物を引数にコマンドを実行する
+
+`ls | xargs grep あ` は `grep あ work.txt yum.log`のように動くイメージ
 
 </details>
 
-## 7.0 コマンドの実行結果をファイルにいちいち保存せずに別のコマンドで使いたい
+## 7. コマンドの実行結果をファイルにいちいち保存せずに別のコマンドで使いたい
 
 <details>
 <summary>答え</summary>
@@ -205,11 +214,40 @@ $ diff -y -W 10 <(for i in {1,2,3,4}; do echo $i; done) <(for i in {1,2,4,5}; do
 
 
 
-## 8. 2つのファイルをjoinする
+## 8. 2つのファイルをjoinして一つにまとめる
+
+```
+# cat name.txt
+apple りんご
+banana バナナ
+melon メロン
+pineapple パイナップル
+
+# cat price.txt
+apple 100円
+banana 120円
+strawberry 650円
+melon 900円
+```
+
+上記の2つのファイルから下記のアウトプットを得たい
+
+```
+apple 100円 りんご
+banana 120円 バナナ
+melon 900円 メロン
+```
 
 <details>
 <summary>答え</summary>
 
+デフォルトは１列目の値が合致する行をまとめてくれます。
 
+```sh
+# join <(sort price.txt) <(sort name.txt)
+apple 100円 りんご
+banana 120円 バナナ
+melon 900円 メロン
+```
 
 </details>
