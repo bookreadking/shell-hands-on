@@ -178,6 +178,9 @@ No Match for argument: freetype
 No Match for argument: gettext
 No Match for argument: gettext-libs
 ```
+
+前後同じ行数取得したい場合は`grep -行数`でもOKです。
+
 </details>
 
 ## 6. ファイルを検索した結果をgrepしたい
